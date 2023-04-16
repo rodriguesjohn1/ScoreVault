@@ -5,6 +5,11 @@ from src import db
 
 analysts = Blueprint('analysts', __name__)
 
+
+##########################################################
+#################       GET ROUTES:
+##########################################################
+
 # Get all players from the DB
 
 
@@ -26,11 +31,11 @@ def get_analysts():
 # Get player detail for player with particular first name and last name
 
 
-@analysts.route('/players/<firstName>/<lastName>', methods=['GET'])
-def get_analyst(firstName, lastName):
+@analysts.route('/players/<playerID>', methods=['GET'])
+def get_analyst(playerID):
     cursor = db.get_db().cursor()
     cursor.execute('select player_id, first_name, last_name, age, goals, '
-                   + 'assists, team_name, international_team from Players where first_name="{0}" AND last_name="{1}"'.format(firstName, lastName))
+                   + 'assists, team_name, international_team from Players where player_id="{0}"'.format(playerID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -234,6 +239,21 @@ def get_allNews():
     the_response.mimetype = 'application/json'
     return the_response
 
+
+@analysts.route('/news/<newsID>', methods=['GET'])
+def get_news_detail(newsID):
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from News where news_id={0}'.format(newsID))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # Get Players News with particular player ID
 
 
@@ -269,7 +289,16 @@ def get_team_news(teamName):
     the_response.mimetype = 'application/json'
     return the_response
 
+
+
+##########################################################
+#################       POST ROUTES:
+##########################################################
+
+
+
 # Post a news article
+
 
 @analysts.route('/news', methods=['POST'])
 def post_news():
@@ -287,109 +316,210 @@ def post_news():
 
     cursor.execute('select * from News order by news_id desc limit 1')
 
-    row_headers=[x[0] for x in cursor.description]
-    json_data=[]
-    theData=cursor.fetchall()
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
     for row in theData:
         json_data.append(dict(zip(row_headers, row)))
 
-    the_response=make_response(jsonify(json_data))
-    the_response.status_code=201
-    the_response.mimetype='application/json'
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 201
+    the_response.mimetype = 'application/json'
 
     return the_response
 
 # Connect News Article to Team
+
+
 @analysts.route('/news/club/<teamName>', methods=['POST'])
 def post_team_news(teamName):
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('insert into Team_News(team_name,news_id) VALUES("{0}","{1}")'.format(teamName,request.json["newsID"]))
+    cursor.execute('insert into Team_News(team_name,news_id) VALUES("{0}","{1}")'.format(
+        teamName, request.json["news_id"]))
     database.commit()
 
-    cursor.execute('select * from News where news_id={0}'.format(request.json["newsID"]))
+    cursor.execute(
+        'select * from News where news_id={0}'.format(request.json["news_id"]))
 
-    row_headers=[x[0] for x in cursor.description]
-    json_data=[]
-    theData=cursor.fetchall()
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
     for row in theData:
         json_data.append(dict(zip(row_headers, row)))
 
-    the_response=make_response(jsonify(json_data))
-    the_response.status_code=201
-    the_response.mimetype='application/json'
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 201
+    the_response.mimetype = 'application/json'
 
     return the_response
 
 # Connect News Article to Player
+
+
 @analysts.route('/news/player/<playerID>', methods=['POST'])
 def post_player_news(playerID):
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('insert into Player_News(player_id,news_id) VALUES("{0}","{1}")'.format(playerID,request.json["newsID"]))
+    cursor.execute('insert into Player_News(player_id,news_id) VALUES("{0}","{1}")'.format(
+        playerID, request.json["news_id"]))
     database.commit()
 
-    cursor.execute('select * from News where news_id={0}'.format(request.json["newsID"]))
+    cursor.execute(
+        'select * from News where news_id={0}'.format(request.json["news_id"]))
 
-    row_headers=[x[0] for x in cursor.description]
-    json_data=[]
-    theData=cursor.fetchall()
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
     for row in theData:
         json_data.append(dict(zip(row_headers, row)))
 
-    the_response=make_response(jsonify(json_data))
-    the_response.status_code=201
-    the_response.mimetype='application/json'
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 201
+    the_response.mimetype = 'application/json'
 
     return the_response
 
+##########################################################
+#################       DELETE ROUTES:
+##########################################################
+
 # Delete a news article
+
 
 @analysts.route('/news', methods=['DELETE'])
 def delete_news():
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('delete from News where news_id={0}'.format(request.json["newsID"]))
+    cursor.execute('delete from News where news_id={0}'.format(
+        request.json["news_id"]))
     database.commit()
 
-
-    the_response=make_response()
-    the_response.status_code=204
-    the_response.mimetype='application/json'
+    the_response = make_response()
+    the_response.status_code = 204
+    the_response.mimetype = 'application/json'
 
     return the_response
 
 # Delete a news article from club
+
 
 @analysts.route('/news/club', methods=['DELETE'])
 def delete_club_news():
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('delete from Team_News where news_id={0}'.format(request.json["newsID"]))
+    cursor.execute('delete from Team_News where news_id={0}'.format(
+        request.json["news_id"]))
     database.commit()
 
-    the_response=make_response()
-    the_response.status_code=204
-    the_response.mimetype='application/json'
+    the_response = make_response()
+    the_response.status_code = 204
+    the_response.mimetype = 'application/json'
 
     return the_response
 
 # Delete a news article from player
+
 
 @analysts.route('/news/player', methods=['DELETE'])
 def delete_player_news():
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('delete from Player_News where news_id={0}'.format(request.json["newsID"]))
+    cursor.execute('delete from Player_News where news_id={0}'.format(
+        request.json["news_id"]))
     database.commit()
 
-    the_response=make_response()
-    the_response.status_code=204
-    the_response.mimetype='application/json'
+    the_response = make_response()
+    the_response.status_code = 204
+    the_response.mimetype = 'application/json'
+
+    return the_response
+
+
+##########################################################
+#################       PUT ROUTES:
+##########################################################
+
+
+# Update Player Stats
+@analysts.route('/players/<playerID>', methods=['PUT'])
+def put_player_stats(playerID):
+    cursor = db.get_db().cursor()
+    database = db.get_db()
+
+    cursor.execute('update Players set goals={0},assists={1} where player_id={2}'.format(
+        request.json["goals"], request.json["assists"], playerID))
+    database.commit()
+
+    cursor.execute('select player_id, first_name, last_name, age, goals, '
+                   + 'assists, team_name, international_team from Players where player_id="{0}"'.format(playerID))
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+
+    return the_response
+
+# Update Game Stats
+
+
+@analysts.route('/games/<gameID>', methods=['PUT'])
+def put_game_stats(gameID):
+    cursor = db.get_db().cursor()
+    database = db.get_db()
+
+    cursor.execute('update Game set home_score={0},away_score={1} where game_id={2}'.format(
+        request.json["home_score"], request.json["away_score"], gameID))
+    database.commit()
+
+    cursor.execute('select * from Game where game_id="{0}"'.format(gameID))
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+
+    return the_response
+
+# Update News
+
+
+@analysts.route('/news/<newsID>', methods=['PUT'])
+def put_news(newsID):
+    cursor = db.get_db().cursor()
+    database = db.get_db()
+
+    cursor.execute('update News set outlet="{0}",author_first="{1}",author_last="{2}",title="{3}",article_description="{4}" where news_id={5}'.format(
+        request.json["outlet"], request.json["author_first"], request.json["author_last"], request.json["title"], request.json["article_description"], newsID))
+
+    database.commit()
+
+    cursor.execute('select * from News where news_id={0}'.format(newsID))
+
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
 
     return the_response
