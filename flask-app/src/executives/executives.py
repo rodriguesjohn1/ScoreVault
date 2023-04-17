@@ -106,8 +106,9 @@ def updatePlayer(playerID):
 def removePlayer(playerID):
     cursor = db.get_db().cursor()
 
-    cursor.execute('DELETE from Player where player_id = ' + playerID)
+    cursor.execute('DELETE FROM Players WHERE player_id = ' + playerID)
     db.get_db().commit()
+    return "Success"
 
 ## GET Route to get a list of games in the database
 @executives.route('/games')
