@@ -28,7 +28,7 @@ def get_analysts():
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get player detail for player with particular first name and last name
+# Get player detail
 
 
 @analysts.route('/players/<playerID>', methods=['GET'])
