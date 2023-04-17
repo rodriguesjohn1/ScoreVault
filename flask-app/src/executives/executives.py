@@ -94,7 +94,7 @@ def updatePlayer(playerID):
 
     contractEndDate = reqData['contractEndDate']
 
-    update_Statement = 'UPDATE Player SET contract_end_date = ' + contractEndDate +' WHERE player_id = ' + playerID
+    update_Statement = 'UPDATE Players SET contract_end_date = "' + contractEndDate +'" WHERE player_id = ' + playerID
 
     cursor = db.get_db().cursor()
     cursor.execute(update_Statement)
