@@ -141,9 +141,13 @@ def addGameToDB():
     game_date = reqData['game_date']
     venue = reqData['venue']
 
-    insert_statement = 'INSERT INTO Game (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("'
-    insert_statement += home_score  + '", "' + away_score + '", "' + home_team + '", "' + away_team + '", "' + game_date + '", "' + venue + '")'
-
+    insert_statement = 'INSERT INTO Game (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("{0}","{1}","{2}","{3}","{4}","{5}")'.format(
+        home_score,
+        away_score,
+        home_team,
+        away_team,
+        game_date,
+        venue)
     cursor = db.get_db().cursor()
     cursor.execute(insert_statement)
     db.get_db().commit()
