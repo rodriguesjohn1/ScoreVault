@@ -50,10 +50,18 @@ def addPlayerToDB():
     clubTeam = reqData['club']
     internationalTeam = reqData['internationalTeam']
 
-    insert_statement = 'INSERT INTO Players (age, first_name, last_name, position, goals, assists,' 
-    + 'jersey_number, nationality, contract_end_date, team_name, international_team) VALUES ("'
-    insert_statement += playerAge  + '", "' + firstName + '", "' + lastName + '", "' + position + '", "' + goals + '", "' + assists + '", "' + jerseyNumber
-    + '", "' + nationality + '", "' + contractEndDate + + '", "' + clubTeam + '", "' + internationalTeam + '")'
+    insert_statement = 'INSERT INTO Players (age, first_name, last_name, position, goals, assists, jersey_number, nationality, contract_end_date, team_name, international_team) VALUES ("{0}","{1}","{2}","{3}","{4}","{5}", "{6}", "{7}", "{8}", "{9}", "{10}")'.format(
+        playerAge,
+        firstName,
+        lastName,
+        position,
+        goals,
+        assists,
+        jerseyNumber,
+        nationality,
+        contractEndDate,
+        clubTeam,
+        internationalTeam)
 
     cursor = db.get_db().cursor()
     cursor.execute(insert_statement)
@@ -132,7 +140,7 @@ def addGameToDB():
     game_date = reqData['game_date']
     venue = reqData['venue']
 
-    insert_statement = 'INSERT INTO Players (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("'
+    insert_statement = 'INSERT INTO Game (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("'
     insert_statement += home_score  + '", "' + away_score + '", "' + home_team + '", "' + away_team + '", "' + game_date + '", "' + venue + '")'
 
     cursor = db.get_db().cursor()
