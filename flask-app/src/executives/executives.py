@@ -177,11 +177,11 @@ def getAllTeams():
     return jsonify(json_data)
 
 ##Route to get the ceo information for a ceo of a specific team
-@executives.route('/club/<teamName>/ceo')
-def getCEOInfo(teamName):
+@executives.route('/club/<clubName>/ceo')
+def getCEOInfo(clubName):
     cursor = db.get_db().cursor()
 
-    cursor.execute('SELECT * FROM CEO WHERE team_name = ' + teamName)
+    cursor.execute('SELECT * FROM CEO WHERE team_name = "' + clubName + '"')
 
     column_headers = [x[0] for x in cursor.description]
 
