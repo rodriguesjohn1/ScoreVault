@@ -1,1 +1,722 @@
-[]
+[
+  {
+    "_id": "f8557f7c-039d-427e-8891-57bd7a6d654d",
+    "colId": "history",
+    "containerId": "",
+    "name": "Players GET Request",
+    "url": "http://localhost:8001/a/players",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:10:41.217Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[player_id=1].first_name",
+        "action": "equal",
+        "value": "Neel"
+      }
+    ]
+  },
+  {
+    "_id": "f203e97a-ddc2-4fd8-8c56-2b139be654d7",
+    "colId": "history",
+    "containerId": "",
+    "name": "Player Details GET Request",
+    "url": "http://localhost:8001/a/players/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:12:28.194Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[player_id].first_name",
+        "action": "equal",
+        "value": "Neel"
+      }
+    ]
+  },
+  {
+    "_id": "e6fe615f-66b8-4960-addd-fac9c3f56ea6",
+    "colId": "history",
+    "containerId": "",
+    "name": "Clubs GET Request",
+    "url": "http://localhost:8001/a/clubs",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:14:15.811Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[team_name=ComerBear].country",
+        "action": "equal",
+        "value": "Haiti"
+      }
+    ]
+  },
+  {
+    "_id": "91c825fb-5a3a-4196-a2c9-07d34132cd1a",
+    "colId": "history",
+    "containerId": "",
+    "name": "Clubs Details GET Request",
+    "url": "http://localhost:8001/a/clubs/ComerBear",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:15:17.746Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.country",
+        "action": "equal",
+        "value": "Haiti"
+      }
+    ]
+  },
+  {
+    "_id": "c12459c7-22c3-41bb-977b-4162ed2a8785",
+    "colId": "history",
+    "containerId": "",
+    "name": "Clubs Roster GET Request",
+    "url": "http://localhost:8001/a/clubs/ComerBear/roster",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:20:07.501Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[0].team_name",
+        "action": "equal",
+        "value": "ComerBear"
+      }
+    ]
+  },
+  {
+    "_id": "72692504-0ccb-44ba-bab9-9151be1770a9",
+    "colId": "history",
+    "containerId": "",
+    "name": "International Teams GET Request",
+    "url": "http://localhost:8001/a/internationalteams",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:25:35.050Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[country=Russia].nickname",
+        "action": "equal",
+        "value": "Bustards"
+      }
+    ]
+  },
+  {
+    "_id": "e7de1ddd-3c5d-42e8-95ec-5609f3cb445c",
+    "colId": "history",
+    "containerId": "",
+    "name": "International Teams Roster GET Request",
+    "url": "http://localhost:8001/a/internationalteams/russia/roster",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:24:36.356Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[0].country",
+        "action": "equal",
+        "value": "Russia"
+      }
+    ]
+  },
+  {
+    "_id": "af49fb85-d433-4c67-a694-d16258222ad5",
+    "colId": "history",
+    "containerId": "",
+    "name": "International Teams Detail GET Request",
+    "url": "http://localhost:8001/a/internationalteams/bustards",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:26:35.342Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[0].country",
+        "action": "equal",
+        "value": "Russia"
+      }
+    ]
+  },
+  {
+    "_id": "0c86cab7-4f90-4ba0-a7fc-54a4131e0456",
+    "colId": "history",
+    "containerId": "",
+    "name": "Stadiums GET Request",
+    "url": "http://localhost:8001/a/stadiums",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:27:52.115Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[stadium_name=Brakus-Kub].country",
+        "action": "equal",
+        "value": "Haiti"
+      }
+    ]
+  },
+  {
+    "_id": "6b5af922-8a16-4ae7-9d3f-44f43f7ab092",
+    "colId": "history",
+    "containerId": "",
+    "name": "Stadiums Detail GET Request",
+    "url": "http://localhost:8001/a/stadiums/Brakus-Kub",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:29:04.346Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.country",
+        "action": "equal",
+        "value": "Haiti"
+      }
+    ]
+  },
+  {
+    "_id": "638cb14c-09b0-4ea3-9e93-fe947f823af8",
+    "colId": "history",
+    "containerId": "",
+    "name": "Games GET Request",
+    "url": "http://localhost:8001/a/games",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:31:33.072Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[game_id=1].home_team",
+        "action": "equal",
+        "value": "Toughjoyfax"
+      }
+    ]
+  },
+  {
+    "_id": "3f143f6f-b04a-496b-9ab9-47a6e9ee36ff",
+    "colId": "history",
+    "containerId": "",
+    "name": "Games Details GET Request",
+    "url": "http://localhost:8001/a/games/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:31:29.635Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.home_team",
+        "action": "equal",
+        "value": "Toughjoyfax"
+      }
+    ]
+  },
+  {
+    "_id": "ae984793-3d61-4f0b-ba19-5fb7400317ad",
+    "colId": "history",
+    "containerId": "",
+    "name": "News GET Request",
+    "url": "http://localhost:8001/a/news",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:32:52.278Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[news_id=1].author_first",
+        "action": "equal",
+        "value": "Igor"
+      }
+    ]
+  },
+  {
+    "_id": "e863900b-4d20-410e-84b7-1630926e9443",
+    "colId": "history",
+    "containerId": "",
+    "name": "News Detail GET Request",
+    "url": "http://localhost:8001/a/news/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:33:16.776Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.author_first",
+        "action": "equal",
+        "value": "Igor"
+      }
+    ]
+  },
+  {
+    "_id": "921385ea-899f-4b0c-a224-baf616cc0d7e",
+    "colId": "history",
+    "containerId": "",
+    "name": "News Player Detail GET Request",
+    "url": "http://localhost:8001/a/news/player/1",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:42:36.633Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[0].player_id",
+        "action": "equal",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "_id": "4ad4fcf2-58f8-4426-bddd-f49fb86560c0",
+    "colId": "history",
+    "containerId": "",
+    "name": "News Club Detail GET Request",
+    "url": "http://localhost:8001/a/news/club/ComerBear",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-16T23:52:06.248Z",
+    "modified": "2023-04-17T00:42:26.511Z",
+    "headers": [],
+    "params": [],
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[0].team_name",
+        "action": "equal",
+        "value": "ComerBear"
+      }
+    ]
+  },
+  {
+    "_id": "ba1823b0-3f6e-49bb-8680-0898ed8a444c",
+    "colId": "history",
+    "containerId": "",
+    "name": "News POST Request",
+    "url": "http://localhost:8001/a/news",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-17T00:40:46.522Z",
+    "modified": "2023-04-17T00:40:46.522Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"article_description\": \"test\",\n    \"author_first\": \"test\",\n    \"author_last\": \"test\",\n    \"news_date\": \"2023-03-12 14:41:52\",\n    \"outlet\": \"test\",\n    \"team_name\": \"test\",\n    \"title\": \"test\"\n  }",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "201"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.title",
+        "action": "equal",
+        "value": "test"
+      }
+    ]
+  },
+  {
+    "_id": "a21a1e43-de89-4a6a-8384-ee47fef83cf6",
+    "colId": "history",
+    "containerId": "",
+    "name": "Club News POST Request",
+    "url": "http://localhost:8001/a/news/club/ComerBear",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-17T00:40:46.522Z",
+    "modified": "2023-04-17T00:53:41.074Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"news_id\":3\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "201"
+      },
+      {
+        "type": "json-query",
+        "custom": "json[news_id=3].title",
+        "action": "equal",
+        "value": "Saturn 3"
+      }
+    ]
+  },
+  {
+    "_id": "26292e38-41ef-467f-90b1-51601f0663e9",
+    "colId": "history",
+    "containerId": "",
+    "name": "Players News POST Request",
+    "url": "http://localhost:8001/a/news/player/1",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2023-04-17T00:40:46.522Z",
+    "modified": "2023-04-17T00:54:19.019Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"news_id\":1\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "201"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.news_id",
+        "action": "equal",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "_id": "207165fe-8812-42b1-89db-9a7895f9be86",
+    "colId": "history",
+    "containerId": "",
+    "name": "News DELETE Request",
+    "url": "http://localhost:8001/a/news",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-04-17T00:57:19.333Z",
+    "modified": "2023-04-17T00:57:59.208Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"news_id\":114141412414241\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "204"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "_id": "09dedff7-37d1-4fbc-a716-897e7e7a9508",
+    "colId": "history",
+    "containerId": "",
+    "name": "Club News DELETE Request",
+    "url": "http://localhost:8001/a/news/club",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-04-17T00:57:19.333Z",
+    "modified": "2023-04-17T00:59:12.200Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"news_id\":114141412414241\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "204"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "_id": "f176e8c7-eb11-465b-8cc7-31536cdf83d8",
+    "colId": "history",
+    "containerId": "",
+    "name": "Player News DELETE Request",
+    "url": "http://localhost:8001/a/news/player",
+    "method": "DELETE",
+    "sortNum": 0,
+    "created": "2023-04-17T00:57:19.333Z",
+    "modified": "2023-04-17T00:59:22.660Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"news_id\":114141412414241\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "204"
+      },
+      {
+        "type": "res-body",
+        "custom": "",
+        "action": "equal",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "_id": "013707ef-9e22-401e-9a95-a818cd56d273",
+    "colId": "history",
+    "containerId": "",
+    "name": "Players POST Request",
+    "url": "http://localhost:8001/a/players/1",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-17T01:02:34.041Z",
+    "modified": "2023-04-17T01:02:34.041Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"goals\":10,\n  \"assists\":10\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.goals",
+        "action": "equal",
+        "value": "10"
+      }
+    ]
+  },
+  {
+    "_id": "c703b4c2-a351-47b2-bce9-a22bb5832178",
+    "colId": "history",
+    "containerId": "",
+    "name": "Games POST Request",
+    "url": "http://localhost:8001/a/games/1",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-17T01:02:34.041Z",
+    "modified": "2023-04-17T01:03:49.839Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"home_score\":10,\n  \"away_score\":0\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.home_score",
+        "action": "equal",
+        "value": "10"
+      }
+    ]
+  },
+  {
+    "_id": "d656ae72-1457-4808-8b82-0399c16f7eec",
+    "colId": "history",
+    "containerId": "",
+    "name": "News POST Request",
+    "url": "http://localhost:8001/a/news/1",
+    "method": "PUT",
+    "sortNum": 0,
+    "created": "2023-04-17T01:02:34.041Z",
+    "modified": "2023-04-17T01:05:28.350Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"article_description\": \"Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.\",\n    \"author_first\": \"Igor\",\n    \"author_last\": \"Longman\",\n    \"news_date\": \"Sun, 12 Mar 2023 14:41:52 GMT\",\n    \"outlet\": \"test\",\n    \"title\": \"Monty Python Live at the Hollywood Bowl\"\n}",
+      "form": []
+    },
+    "tests": [
+      {
+        "type": "res-code",
+        "custom": "",
+        "action": "equal",
+        "value": "200"
+      },
+      {
+        "type": "json-query",
+        "custom": "json.outlet",
+        "action": "equal",
+        "value": "test"
+      }
+    ]
+  }
+]
