@@ -278,7 +278,8 @@ def get_player_news(playerID):
 @analysts.route('/news/club/<teamName>', methods=['GET'])
 def get_team_news(teamName):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from News')
+    cursor.execute('select * from News join Team_News tn on '
+                   + 'News.news_id = tn.news_id where team_name="{0}"'.format(teamName))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -336,7 +337,7 @@ def post_team_news(teamName):
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('insert into Team_News(team_name,news_id) VALUES("{0}","{1}")'.format(
+    cursor.execute('insert ignore into Team_News(team_name,news_id) VALUES("{0}","{1}")'.format(
         teamName, request.json["news_id"]))
     database.commit()
 
@@ -363,7 +364,7 @@ def post_player_news(playerID):
     cursor = db.get_db().cursor()
     database = db.get_db()
 
-    cursor.execute('insert into Player_News(player_id,news_id) VALUES("{0}","{1}")'.format(
+    cursor.execute('insert ignore into Player_News(player_id,news_id) VALUES("{0}","{1}")'.format(
         playerID, request.json["news_id"]))
     database.commit()
 
