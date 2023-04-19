@@ -236,3 +236,74 @@ def getCEOInfo(clubName):
         json_data.append(dict(zip(column_headers, row)))
 
     return jsonify(json_data)
+
+##Route to get Manager info about the manager of a specific club
+@executives.route('/managers/<clubName>')
+def getManagerInfo(clubName):
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT first_name, last_name, team_name, age, salary, contract_end_date FROM Manager WHERE team_name = "{0}"'.format(clubName))
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+##Route to get a list of all stadiums
+@executives.route('/stadiums')
+def getStadiums():
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT * FROM Stadium')
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+##Route to get player agent info for a specifc player
+@executives.route('/players/agent/<playerID>')
+def getAgentInfo(playerID):
+    cursor = db.get_db().cursor()
+    cursor.execute('SELECT first_name, last_name, email, phone, company FROM Agent WHERE player_id = ' + playerID)
+    
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
+
+##Route to get a list of games by team name
+@executives.route('/games/club/<clubName>')
+def getGamesByTeam(clubName):
+    cursor = db.get_db().cursor()
+
+    cursor.execute('SELECT home_score, away_score, home_team, away_team, game_date, venue FROM Game WHERE home_team = "{0}" OR away_team = "{0}"'.format(clubName))
+
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
