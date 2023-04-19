@@ -7,7 +7,7 @@ analysts = Blueprint('analysts', __name__)
 
 
 ##########################################################
-#################       GET ROUTES:
+# GET ROUTES:
 ##########################################################
 
 # Get all players from the DB
@@ -86,7 +86,7 @@ def get_club(teamName):
 @analysts.route('/clubs/<teamName>/roster', methods=['GET'])
 def get_clubs_roster(teamName):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from Club join '
+    cursor.execute('select first_name, last_name, Club.team_name from Club join '
                    + 'Players p on Club.team_name = '
                    + 'p.team_name where p.team_name="{0}"'.format(teamName))
     row_headers = [x[0] for x in cursor.description]
@@ -122,7 +122,7 @@ def get_intlTeams():
 @analysts.route('/internationalteams/<teamName>/roster', methods=['GET'])
 def get_intlTeams_roster(teamName):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from InternationalTeam join '
+    cursor.execute('select first_name, last_name, country from InternationalTeam join '
                    + 'Players p on InternationalTeam.country = '
                    + 'p.international_team where p.international_team="{0}"'.format(teamName))
     row_headers = [x[0] for x in cursor.description]
@@ -254,14 +254,14 @@ def get_news_detail(newsID):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get Players News with particular player ID
+# Get MOST RECENT Players News with particular player ID
 
 
 @analysts.route('/news/player/<playerID>', methods=['GET'])
 def get_player_news(playerID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from News join Player_News pn on '
-                   + 'News.news_id = pn.news_id where player_id={0}'.format(playerID))
+                   + 'News.news_id = pn.news_id where player_id={0} order by News.news_date desc limit 1'.format(playerID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -272,14 +272,14 @@ def get_player_news(playerID):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Get Club News with particular club ID
+# Get MOST RECENT Club News with particular club ID
 
 
 @analysts.route('/news/club/<teamName>', methods=['GET'])
 def get_team_news(teamName):
     cursor = db.get_db().cursor()
     cursor.execute('select * from News join Team_News tn on '
-                   + 'News.news_id = tn.news_id where team_name="{0}"'.format(teamName))
+                   + 'News.news_id = tn.news_id where team_name="{0}" order by News.news_date desc limit 1'.format(teamName))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -291,11 +291,9 @@ def get_team_news(teamName):
     return the_response
 
 
-
 ##########################################################
-#################       POST ROUTES:
+# POST ROUTES:
 ##########################################################
-
 
 
 # Post a news article
@@ -384,7 +382,7 @@ def post_player_news(playerID):
     return the_response
 
 ##########################################################
-#################       DELETE ROUTES:
+# DELETE ROUTES:
 ##########################################################
 
 # Delete a news article
@@ -443,7 +441,7 @@ def delete_player_news():
 
 
 ##########################################################
-#################       PUT ROUTES:
+# PUT ROUTES:
 ##########################################################
 
 
