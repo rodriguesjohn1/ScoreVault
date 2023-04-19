@@ -31,4 +31,8 @@ Once the docker containers have been started, the appsmith webpages can be reach
 # Interpreting the Flask API
 The endpoints for the Flask API are seperated in two blueprints: executives and analysts. These blueprints correspond to the user that is using the web application. In each blueprint, there are various endpoints/routes that are labelled by the type of request they take and their respective route. For any endpoint in the executive blueprint, the route would be localhost:8001/e/ + whatever the resource URL is for that route. For any endpoint in the analyst blueprint, the route would be localhost:8001/a/ + whatever the resource URL is for that route. 
 
+# Video Demo 
+Below is a video demo of ScoreVault.
 
+
+https://drive.google.com/file/d/1rsemi1-HTGjhWNuYpHuMUCecrxr-V0RF/view?usp=sharing
