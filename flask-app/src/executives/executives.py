@@ -99,16 +99,46 @@ def updatePlayer(playerID):
     cursor = db.get_db().cursor()
     cursor.execute(update_Statement)
     db.get_db().commit()
-    return "Success"
+
+    cursor.execute('SELECT age, first_name, last_name, position, goals, assists,' 
+    + 'jersey_number, nationality, contract_end_date, team_name, international_team FROM Players WHERE player_id = ' + playerID)
+    
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
 
 ##Route to delete a player
 @executives.route('/players/<playerID>', methods = ['DELETE'])
 def removePlayer(playerID):
     cursor = db.get_db().cursor()
 
+    cursor.execute('SELECT count(*) FROM Players')
+
+    data = cursor.fetchall()
+    for row in data:
+        initialCount = row[0]
+
+
     cursor.execute('DELETE FROM Players WHERE player_id = ' + playerID)
+
     db.get_db().commit()
-    return "Success"
+
+    cursor.execute('SELECT count(*) FROM Players')
+
+    data = cursor.fetchall()
+    for row in data:
+        finalCount = row[0]
+
+    rowsDeleted = initialCount - finalCount
+
+    return "Success. Rows deleted: " + str(rowsDeleted)
 
 ## GET Route to get a list of games in the database
 @executives.route('/games')
