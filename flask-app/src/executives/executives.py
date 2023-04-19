@@ -94,20 +94,51 @@ def updatePlayer(playerID):
 
     contractEndDate = reqData['contractEndDate']
 
-    update_Statement = 'UPDATE Player SET contract_end_date = ' + contractEndDate +' WHERE player_id = ' + playerID
+    update_Statement = 'UPDATE Players SET contract_end_date = "' + contractEndDate +'" WHERE player_id = ' + playerID
 
     cursor = db.get_db().cursor()
     cursor.execute(update_Statement)
     db.get_db().commit()
-    return "Success"
+
+    cursor.execute('SELECT age, first_name, last_name, position, goals, assists,' 
+    + 'jersey_number, nationality, contract_end_date, team_name, international_team FROM Players WHERE player_id = ' + playerID)
+    
+    column_headers = [x[0] for x in cursor.description]
+
+    json_data = []
+
+    theData = cursor.fetchall()
+
+    for row in theData:
+        json_data.append(dict(zip(column_headers, row)))
+
+    return jsonify(json_data)
 
 ##Route to delete a player
 @executives.route('/players/<playerID>', methods = ['DELETE'])
 def removePlayer(playerID):
     cursor = db.get_db().cursor()
 
-    cursor.execute('DELETE from Player where player_id = ' + playerID)
+    cursor.execute('SELECT count(*) FROM Players')
+
+    data = cursor.fetchall()
+    for row in data:
+        initialCount = row[0]
+
+
+    cursor.execute('DELETE FROM Players WHERE player_id = ' + playerID)
+
     db.get_db().commit()
+
+    cursor.execute('SELECT count(*) FROM Players')
+
+    data = cursor.fetchall()
+    for row in data:
+        finalCount = row[0]
+
+    rowsDeleted = initialCount - finalCount
+
+    return "Success. Rows deleted: " + str(rowsDeleted)
 
 ## GET Route to get a list of games in the database
 @executives.route('/games')
@@ -140,9 +171,13 @@ def addGameToDB():
     game_date = reqData['game_date']
     venue = reqData['venue']
 
-    insert_statement = 'INSERT INTO Game (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("'
-    insert_statement += home_score  + '", "' + away_score + '", "' + home_team + '", "' + away_team + '", "' + game_date + '", "' + venue + '")'
-
+    insert_statement = 'INSERT INTO Game (home_score, away_score, home_team, away_team, game_date, venue) VALUES ("{0}","{1}","{2}","{3}","{4}","{5}")'.format(
+        home_score,
+        away_score,
+        home_team,
+        away_team,
+        game_date,
+        venue)
     cursor = db.get_db().cursor()
     cursor.execute(insert_statement)
     db.get_db().commit()
