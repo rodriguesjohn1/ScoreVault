@@ -1,0 +1,444 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Executive Requests",
+    "dateExported": "2023-04-19T19:36:06.338Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "69752cbb-0472-46c0-b217-e085ba22e1cd",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Player List",
+            "url": "localhost:8001/e/players",
+            "method": "GET",
+            "sortNum": 5000,
+            "created": "2023-04-17T20:31:37.791Z",
+            "modified": "2023-04-19T02:32:54.004Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Length",
+                    "custom": "",
+                    "action": ">=",
+                    "value": "7839"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].first_name",
+                    "action": "equal",
+                    "value": "Neel"
+                }
+            ]
+        },
+        {
+            "_id": "89d32548-28ea-45b5-a6fe-2219aa52e891",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Add Player",
+            "url": "localhost:8001/e/players",
+            "method": "POST",
+            "sortNum": 6250,
+            "created": "2023-04-17T20:29:22.265Z",
+            "modified": "2023-04-19T02:08:51.940Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"age\": 12,\n  \"firstName\": \"test\",\n  \"lastName\": \"testing\",\n  \"position\": \"LB\",\n  \"goals\": 12,\n  \"assists\": 5,\n  \"jerseyNumber\": 7,\n  \"nationality\": \"Brazilian\",\n  \"contractEndDate\": \"2022-12-12\",\n  \"club\": \"Comerbear\",\n  \"internationalTeam\": \"China\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Success"
+                }
+            ]
+        },
+        {
+            "_id": "2e5b0ce2-fc1a-470a-a881-ac226834e596",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get CEO of Club",
+            "url": "localhost:8001/e/club/Alphazap/ceo",
+            "method": "GET",
+            "sortNum": 7500,
+            "created": "2023-04-17T21:15:25.026Z",
+            "modified": "2023-04-19T02:33:09.661Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Length",
+                    "custom": "",
+                    "action": ">=",
+                    "value": "32"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].team_name",
+                    "action": "equal",
+                    "value": "Alphazap"
+                }
+            ]
+        },
+        {
+            "_id": "4e75c83f-47c3-47fe-8960-7321a67274a7",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Specific Player",
+            "url": "localhost:8001/e/players/1",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-04-17T20:32:21.695Z",
+            "modified": "2023-04-19T14:45:50.405Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "isjson",
+                    "value": ""
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].first_name",
+                    "action": "equal",
+                    "value": "Neel"
+                }
+            ]
+        },
+        {
+            "_id": "b18b04aa-4d29-4a5e-b9ab-268a2dcbe912",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Update Player Contract",
+            "url": "localhost:8001/e/players/1",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-04-17T20:32:58.643Z",
+            "modified": "2023-04-19T02:14:23.279Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"contractEndDate\": \"2022-12-12\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                }
+            ]
+        },
+        {
+            "_id": "839f4a6b-f924-4028-be9d-8528fa87e68b",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Delete Player",
+            "url": "localhost:8001/e/players/1",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-04-17T20:39:34.730Z",
+            "modified": "2023-04-19T14:47:03.599Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Success"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Rows deleted: 1"
+                }
+            ]
+        },
+        {
+            "_id": "09b77bab-97aa-4b9c-bb7d-0d5140769650",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Games List",
+            "url": "localhost:8001/e/games",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-04-17T21:07:39.235Z",
+            "modified": "2023-04-19T02:17:25.255Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Length",
+                    "custom": "",
+                    "action": ">=",
+                    "value": "104"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].home_team",
+                    "action": "equal",
+                    "value": "Toughjoyfax"
+                }
+            ]
+        },
+        {
+            "_id": "74ba78ab-189c-4ec5-8c49-2ff9308f30f5",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Add a Game",
+            "url": "localhost:8001/e/games",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-04-17T21:08:44.325Z",
+            "modified": "2023-04-19T02:17:59.483Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"home_score\": 99,\n  \"away_score\": 2,\n  \"home_team\": \"Zontrax\",\n  \"away_team\": \"Subin\",\n  \"game_date\": \"2020-12-24\",\n  \"venue\": \"Schaden-King\"\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "res-body",
+                    "custom": "",
+                    "action": "contains",
+                    "value": "Success"
+                }
+            ]
+        },
+        {
+            "_id": "3c8af495-5ce1-42da-8a30-79d69a801a5b",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get A Specific Game",
+            "url": "localhost:8001/e/games/1",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-04-17T21:12:42.375Z",
+            "modified": "2023-04-19T02:27:04.955Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].home_team",
+                    "action": "equal",
+                    "value": "Toughjoyfox"
+                }
+            ]
+        },
+        {
+            "_id": "98f29829-4195-47d9-8699-5278278509e6",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Club",
+            "url": "localhost:8001/e/club",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-04-17T21:14:56.096Z",
+            "modified": "2023-04-19T02:37:19.581Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "Content-Length",
+                    "custom": "",
+                    "action": ">=",
+                    "value": "172"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].team_name",
+                    "action": "equal",
+                    "value": "Alpha"
+                }
+            ]
+        },
+        {
+            "_id": "484fafe2-d6a5-4948-93d9-c4af443bfe67",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Games By Team",
+            "url": "localhost:8001/e/games/club/Comerbear",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2023-04-19T01:51:42.819Z",
+            "modified": "2023-04-19T02:45:40.311Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].away_team",
+                    "action": "equal",
+                    "value": "Comerbear"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[2].home_team",
+                    "action": "equal",
+                    "value": "ComerBear"
+                }
+            ]
+        },
+        {
+            "_id": "1cbbe615-54a6-49d9-b0f2-fcbb2a7206a5",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Player Agent",
+            "url": "localhost:8001/e/players/agent/1",
+            "method": "GET",
+            "sortNum": 150000,
+            "created": "2023-04-19T02:50:01.363Z",
+            "modified": "2023-04-19T02:50:44.727Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].first_name",
+                    "action": "equal",
+                    "value": "Robbie"
+                }
+            ]
+        },
+        {
+            "_id": "2bc3b8e3-4c26-48b7-b7bf-3a10927c966e",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Manager info",
+            "url": "localhost:8001/e/managers/ComerBear",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2023-04-19T02:54:28.736Z",
+            "modified": "2023-04-19T02:55:48.056Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].first_name",
+                    "action": "equal",
+                    "value": "Bernette"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].team_name",
+                    "action": "equal",
+                    "value": "ComerBear"
+                }
+            ]
+        },
+        {
+            "_id": "6c9c3f74-5633-4f5b-bf58-8e4391751e49",
+            "colId": "79b98ecd-a608-4a35-8cb0-277a5d570a7a",
+            "containerId": "",
+            "name": "Get Stadium",
+            "url": "localhost:8001/e/stadiums",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-04-19T02:57:18.117Z",
+            "modified": "2023-04-19T02:58:06.780Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "200"
+                },
+                {
+                    "type": "json-query",
+                    "custom": "json.[0].stadium_name",
+                    "action": "equal",
+                    "value": "Balistreri, Hermann and Rodriguez"
+                }
+            ]
+        }
+    ]
+}
