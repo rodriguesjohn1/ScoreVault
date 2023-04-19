@@ -28,6 +28,8 @@ This repo contains setup for spinning up 3 Docker containers:
 # Accessing the application
 Once the docker containers have been started, the appsmith webpages can be reached by going to localhost:8080 in any browser window.
 
+To view any details page on a table, click on the row that you would like to see details for and a modal should pop up!
+
 # Interpreting the Flask API
 The endpoints for the Flask API are seperated in two blueprints: executives and analysts. These blueprints correspond to the user that is using the web application. In each blueprint, there are various endpoints/routes that are labelled by the type of request they take and their respective route. For any endpoint in the executive blueprint, the route would be localhost:8001/e/ + whatever the resource URL is for that route. For any endpoint in the analyst blueprint, the route would be localhost:8001/a/ + whatever the resource URL is for that route. 
 
